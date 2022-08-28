@@ -1,6 +1,16 @@
 version: 2.1
 
 commands:
+  install_awscli:
+    description: Install AWS cli
+    steps:
+      - run:
+          name: Install AWS cli
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+
   install_ansible:
     description: Install Ansible
     steps:
@@ -276,7 +286,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-             curl --insecure https://kvdb.io/33GxcCpH7rHocPuWALvF32/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+             curl --insecure https://kvdb.io/4koUWtzhNSoNtYXQo19VHz/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
      # Here's where you will add some code to rollback on failure 
       - destroy-environment 
